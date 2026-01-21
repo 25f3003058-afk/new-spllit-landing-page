@@ -46,7 +46,11 @@ const plans = [
 
 const Pricing = () => {
     return (
-        <div className="pt-32 pb-20">
+        <div className="pt-20 min-h-screen bg-black text-white px-4">
+            <SEO
+                title="Pricing & Savings"
+                description="Transparent fare splitting and cost savings. See how much you can save on your daily commute with Spllit."
+            />
             <div className="container mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
