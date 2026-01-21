@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
 import { FaCheck } from 'react-icons/fa';
-import InstituteSection from '../components/InstituteSection';
+
+// Lazy load InstituteSection for better performance
+const InstituteSection = lazy(() => import('../components/InstituteSection'));
 
 const plans = [
     {
@@ -16,9 +18,11 @@ const plans = [
     },
     {
         name: "Pro",
-        price: "₹199",
+        price: "₹1",
+        originalPrice: "₹199",
         period: "/month",
         popular: true,
+        isBeta: true,
         features: [
             "Zero convenience fees",
             "Priority matching",
@@ -68,10 +72,27 @@ const Pricing = () => {
                                 </span>
                             )}
                             <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                            <div className="flex items-baseline justify-center gap-1 mb-8">
-                                <span className="text-4xl font-bold text-white">{plan.price}</span>
-                                {plan.period && <span className="text-text-muted">{plan.period}</span>}
+
+                            {plan.isBeta && (
+                                <div className="mb-4">
+                                    <span className="bg-accent-green/10 text-accent-green text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider border border-accent-green/20">
+                                        Beta Testing Special
+                                    </span>
+                                </div>
+                            )}
+
+                            <div className="flex flex-col items-center mb-8">
+                                <div className="flex items-baseline gap-2">
+                                    <span className="text-4xl font-bold text-white">{plan.price}</span>
+                                    {plan.period && <span className="text-text-muted">{plan.period}</span>}
+                                </div>
+                                {plan.originalPrice && (
+                                    <div className="mt-1">
+                                        <span className="text-text-muted line-through text-lg">{plan.originalPrice}</span>
+                                    </div>
+                                )}
                             </div>
+
                             <ul className="space-y-4 mb-8 text-left">
                                 {plan.features.map((feature, i) => (
                                     <li key={i} className="flex items-center gap-3 text-text-secondary">
@@ -88,10 +109,16 @@ const Pricing = () => {
                 </div>
             </div>
 
-            <InstituteSection />
+            {/* Institute Section - Lazy Loaded */}
+            <Suspense fallback={
+                <div className="py-20 bg-bg-primary flex items-center justify-center">
+                    <div className="w-12 h-12 border-4 border-accent-green border-t-transparent rounded-full animate-spin"></div>
+                </div>
+            }>
+                <InstituteSection />
+            </Suspense>
         </div>
     );
 };
 
 export default Pricing;
-

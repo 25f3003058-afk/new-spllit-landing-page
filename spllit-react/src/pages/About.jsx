@@ -205,24 +205,21 @@ const About = () => {
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="relative max-w-5xl mx-auto aspect-video rounded-[4rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.5)] border border-white/10 group cursor-pointer bg-bg-secondary"
+                    className="relative max-w-5xl mx-auto aspect-video rounded-[4rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.5)] border border-white/10 group cursor-pointer bg-bg-secondary flex items-center justify-center"
                 >
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-700 z-10 flex items-center justify-center">
-                        <motion.div
-                            whileHover={{ scale: 1.2 }}
-                            className="w-24 h-24 bg-accent-green rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(16,185,129,0.5)]"
-                        >
-                            <FaPlay className="text-black text-3xl ml-2" />
-                        </motion.div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-accent-green/5 to-transparent opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
+                    <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="relative z-20 w-32 h-32 bg-accent-green rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(16,185,129,0.4)] group-hover:shadow-[0_0_80px_rgba(16,185,129,0.6)] transition-all duration-500"
+                    >
+                        <FaPlay className="text-black text-4xl ml-2" />
+                    </motion.div>
+
+                    {/* Decorative background elements for the placeholder */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-10 pointer-events-none">
+                        <div className="absolute inset-0 bg-[url('/logo-icon.png')] bg-center bg-no-repeat bg-contain scale-150 blur-sm"></div>
                     </div>
-                    <iframe
-                        className="w-full h-full relative z-0 grayscale-[0.5] group-hover:grayscale-0 transition-all duration-700"
-                        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                        title="Spllit Success Story"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                    ></iframe>
                 </motion.div>
             </section>
 
@@ -235,13 +232,13 @@ const About = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-5xl mx-auto mb-32">
                     <TeamCard
-                        name="Founder Name"
+                        name="Ankit Raj Choudhari"
                         role="Founder & CEO"
                         location="IIT Madras, India"
                         image="/logo-icon.png"
                     />
                     <TeamCard
-                        name="Co-Founder Name"
+                        name="Raunak Ratan"
                         role="Co-Founder & CTO"
                         location="IIT Madras, India"
                         image="/logo-icon.png"
@@ -250,19 +247,19 @@ const About = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                     <TeamCard
-                        name="Team Member 1"
+                        name="Shivam"
                         role="Lead Engineer"
+                        location="Chennai, IIT Madras"
+                    />
+                    <TeamCard
+                        name="Sakshi"
+                        role="Product Designer"
                         location="Bangalore, India"
                     />
                     <TeamCard
-                        name="Team Member 2"
-                        role="Product Designer"
-                        location="Mumbai, India"
-                    />
-                    <TeamCard
-                        name="Team Member 3"
-                        role="Marketing Lead"
-                        location="Delhi, India"
+                        name="Saurav Yadav"
+                        role="Lead Engineer"
+                        location="Chennai, IIT Madras"
                     />
                 </div>
             </section>

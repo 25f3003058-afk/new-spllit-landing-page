@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGraduationCap, FaChevronRight, FaCheckCircle, FaUniversity, FaArrowLeft, FaUser, FaEnvelope, FaPhone } from 'react-icons/fa';
-import confetti from 'canvas-confetti';
 
 const institutes = [
     { id: 'iitm', name: 'IIT Madras', type: 'IIT', color: '#1a365d' },
@@ -61,7 +60,10 @@ const InstituteSection = () => {
         setIsSubmitted(false);
     };
 
-    const triggerCelebration = () => {
+    const triggerCelebration = async () => {
+        // Dynamically import confetti to reduce initial bundle size
+        const { default: confetti } = await import('canvas-confetti');
+
         const duration = 3 * 1000;
         const animationEnd = Date.now() + duration;
         const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
@@ -88,7 +90,7 @@ const InstituteSection = () => {
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx0KmFKiMXlHycqNliSbn_tBCcldTHAvehAVS90I1DCoBoJy6remGvm2rBR2Z72VIw/exec';
 
         try {
-            // Sending redundant keys (both lowercase and uppercase) to ensure matching with Google Script
+            // Mapping keys to match Google Sheet headers exactly (Case Sensitive)
             const payload = {
                 // Lowercase keys (standard)
                 name: formData.name,
@@ -111,7 +113,8 @@ const InstituteSection = () => {
                 type: 'Institute_Waitlist'
             };
 
-            console.log('Sending data to Google Sheets:', payload);
+            // Trigger celebration immediately for faster feedback
+            triggerCelebration();
 
             await fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
@@ -123,7 +126,6 @@ const InstituteSection = () => {
             });
 
             setIsSubmitted(true);
-            triggerCelebration();
         } catch (error) {
             console.error('Error submitting:', error);
             alert('Submission failed. Please try again.');
