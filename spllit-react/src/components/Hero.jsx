@@ -246,10 +246,10 @@ const Hero = () => {
                             animate={{ opacity: 1, scale: 1 }}
                             className="w-full max-w-2xl relative z-20"
                         >
-                            <div className="relative bg-black/60 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden">
+                            <div className="relative bg-black/60 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 md:p-8 shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col max-h-[70vh] w-full mx-auto">
 
                                 {/* Header Status Bar */}
-                                <div className="flex items-center justify-between mb-12 border-b border-white/5 pb-4">
+                                <div className="flex-shrink-0 flex items-center justify-between mb-8 border-b border-white/5 pb-4 z-20 relative">
                                     <div className="flex items-center gap-3">
                                         <div className="flex gap-1 h-3 items-end">
                                             <motion.div animate={{ height: [4, 12, 4] }} transition={{ repeat: Infinity, duration: 1.5 }} className="w-1 bg-accent-green rounded-full" />
@@ -266,8 +266,8 @@ const Hero = () => {
                                     </button>
                                 </div>
 
-                                {/* 3D Avatar */}
-                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 pointer-events-none opacity-80">
+                                {/* 3D Avatar - Positioned absolutely in background */}
+                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 pointer-events-none opacity-80 z-0">
                                     <View className="w-full h-full">
                                         <ambientLight intensity={0.8} />
                                         <pointLight position={[10, 10, 10]} intensity={1.5} />
@@ -275,13 +275,19 @@ const Hero = () => {
                                     </View>
                                 </div>
 
-                                <div className="space-y-6 min-h-[300px] text-left relative z-10">
+                                {/* Scrollable Message Area */}
+                                <div className="flex-1 overflow-y-auto space-y-6 text-left relative z-10 pr-2 custom-scrollbar">
                                     {chatMessages.map((msg, index) => (
                                         <div key={msg.id} className={`${chatStep >= index + 1 ? 'block' : 'hidden'}`}>
                                             <motion.div
                                                 initial={{ opacity: 0, x: -20 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 className="flex gap-4 items-start"
+                                                onLayoutAnimationComplete={() => {
+                                                    // Auto-scroll logic if needed
+                                                    const container = document.querySelector('.custom-scrollbar');
+                                                    if (container) container.scrollTop = container.scrollHeight;
+                                                }}
                                             >
                                                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent-green/20 to-accent-emerald/20 border border-accent-green/30 flex items-center justify-center flex-shrink-0">
                                                     <FaRobot className="text-accent-green text-lg" />
@@ -294,6 +300,8 @@ const Hero = () => {
                                                                 text={msg.text}
                                                                 onComplete={() => {
                                                                     if (index < chatMessages.length - 1) {
+                                                                        const container = document.querySelector('.custom-scrollbar');
+                                                                        if (container) container.scrollTop = container.scrollHeight;
                                                                         setTimeout(() => setChatStep(index + 2), 1000);
                                                                     }
                                                                 }}
