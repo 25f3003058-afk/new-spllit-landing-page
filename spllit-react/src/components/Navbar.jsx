@@ -109,20 +109,22 @@ const Navbar = () => {
                                 <MobileNavLink to="/pricing" onClick={() => setMobileMenuOpen(false)}>Pricing</MobileNavLink>
                                 <MobileNavLink to="/blog" onClick={() => setMobileMenuOpen(false)}>Blog</MobileNavLink>
                                 <div className="h-px bg-white/10 my-2"></div>
-                                <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                                    <button className="bg-white/5 text-white px-6 py-3 rounded-xl font-medium w-full mb-2">
-                                        Login
+                                <div className="flex gap-4 mt-2">
+                                    <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="flex-1">
+                                        <button className="w-full bg-white/5 border border-white/10 text-white px-4 py-3 rounded-xl font-medium hover:bg-white/10 transition-colors">
+                                            Login
+                                        </button>
+                                    </Link>
+                                    <button
+                                        onClick={() => {
+                                            setMobileMenuOpen(false);
+                                            setIsSignupOpen(true);
+                                        }}
+                                        className="flex-1 bg-gradient-to-r from-accent-green to-accent-emerald text-white px-4 py-3 rounded-xl font-semibold shadow-lg hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all"
+                                    >
+                                        Get Started
                                     </button>
-                                </Link>
-                                <button
-                                    onClick={() => {
-                                        setMobileMenuOpen(false);
-                                        setIsSignupOpen(true);
-                                    }}
-                                    className="bg-gradient-to-r from-accent-green to-accent-emerald text-white px-6 py-3 rounded-xl font-semibold w-full"
-                                >
-                                    Get Started
-                                </button>
+                                </div>
                             </div>
                         </motion.div>
                     )}
