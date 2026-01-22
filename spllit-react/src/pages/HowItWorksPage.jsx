@@ -37,12 +37,12 @@ const SplitSimulator = () => {
     }, [billAmount, peopleCount]);
 
     return (
-        <div className="py-20 bg-bg-primary relative overflow-hidden">
+        <div className="py-12 bg-bg-primary relative overflow-hidden">
             {/* Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent-green/5 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="container mx-auto px-6 relative z-10">
-                <div className="text-center mb-16">
+                <div className="text-center mb-10">
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -200,7 +200,7 @@ const StoryFlow = () => {
     ];
 
     return (
-        <section className="py-32 bg-black relative overflow-hidden">
+        <section className="py-16 bg-black relative overflow-hidden">
             {/* Ambient Background Effects */}
             <div className="absolute inset-0">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-accent-green/5 blur-[120px] rounded-full mix-blend-screen" />
@@ -209,7 +209,7 @@ const StoryFlow = () => {
 
             <div className="container mx-auto px-6 relative z-10">
                 {/* Section Header */}
-                <div className="text-center mb-24">
+                <div className="text-center mb-12">
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -457,7 +457,7 @@ const HowItWorksPage = () => {
     return (
         <div className="pt-20 min-h-screen bg-bg-primary">
             {/* Header Section */}
-            <div className="bg-bg-secondary pt-20 pb-10 border-b border-white/5 relative overflow-hidden">
+            <div className="bg-bg-secondary pt-16 pb-6 border-b border-white/5 relative overflow-hidden">
                 <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent-green/50 to-transparent" />
                 <div className="container mx-auto px-6 text-center relative z-10">
                     <motion.h1

@@ -111,7 +111,7 @@ const MobileTimeline = ({ activeStep, setActiveStep, progress }) => (
         </motion.div>
 
         {/* Step Cards Container */}
-        <div className="flex flex-col justify-between flex-1 py-0 h-[600px]">
+        <div className="flex flex-col justify-between flex-1 py-0 h-[500px]">
             {steps.map((step, index) => (
                 <motion.div
                     key={step.id}
@@ -244,9 +244,9 @@ const HowItWorks = () => {
     const progress = (activeStep / (steps.length - 1)) * 100;
 
     return (
-        <section id="how-it-works" className="py-20 bg-bg-secondary relative overflow-hidden">
+        <section id="how-it-works" className="py-12 bg-bg-secondary relative overflow-hidden">
             <div className="container mx-auto px-6">
-                <div className="text-center max-w-3xl mx-auto mb-16">
+                <div className="text-center max-w-3xl mx-auto mb-10">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
