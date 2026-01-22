@@ -147,10 +147,10 @@ const Login = () => {
             </Link>
 
             <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
-                <div className="flex flex-col lg:flex-row items-center gap-20">
+                <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
                     {/* Left: Content */}
-                    <div className="flex-1 text-center lg:text-left">
+                    <div className="flex-1 w-full text-center lg:text-left pt-10 lg:pt-0 order-2 lg:order-1">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -160,23 +160,23 @@ const Login = () => {
                             <div className="inline-block mb-6">
                                 <motion.div
                                     whileHover={{ scale: 1.05 }}
-                                    className="px-6 py-2 bg-gradient-to-r from-red-600 to-red-900 rounded-full border border-red-500/30 shadow-[0_0_20px_rgba(220,38,38,0.4)] flex items-center gap-3"
+                                    className="px-4 lg:px-6 py-2 bg-gradient-to-r from-red-600 to-red-900 rounded-full border border-red-500/30 shadow-[0_0_20px_rgba(220,38,38,0.4)] flex items-center gap-2 lg:gap-3"
                                 >
-                                    <FaGraduationCap className="text-white text-xl" />
-                                    <span className="text-white font-bold tracking-wide uppercase text-sm">
+                                    <FaGraduationCap className="text-white text-lg lg:text-xl" />
+                                    <span className="text-white font-bold tracking-wide uppercase text-xs lg:text-sm">
                                         Exclusively for IIT Madras BS Students
                                     </span>
                                 </motion.div>
                             </div>
 
-                            <h1 className="text-5xl lg:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight">
+                            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight">
                                 Don't Travel to <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green via-emerald-400 to-teal-500">
                                     Exam Centers
                                 </span> Alone.
                             </h1>
 
-                            <p className="text-gray-400 text-lg lg:text-xl mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                            <p className="text-gray-400 text-base lg:text-xl mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed px-4 lg:px-0">
                                 Connect with verified batchmates going to the same Ion Digital Zone. Split the cab fare, share notes, and make the journey count.
                             </p>
 
@@ -218,15 +218,15 @@ const Login = () => {
                     </div>
 
                     {/* Right: Interactive Component */}
-                    <div className="flex-1 flex justify-center relative">
+                    <div className="flex-1 w-full flex justify-center relative order-1 lg:order-2 mb-8 lg:mb-0">
                         <motion.div
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8 }}
-                            className="relative"
+                            className="relative scale-[0.85] sm:scale-100 transform-gpu"
                         >
                             {/* Glow Effects behind phone */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent-green/20 rounded-full blur-[120px] pointer-events-none" />
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] lg:w-[500px] h-[300px] lg:h-[500px] bg-accent-green/20 rounded-full blur-[80px] lg:blur-[120px] pointer-events-none" />
 
                             <PhoneMockup />
 
@@ -234,7 +234,7 @@ const Login = () => {
                             <motion.div
                                 animate={{ y: [-10, 10, -10] }}
                                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                className="absolute -bottom-10 -right-10 bg-black/60 backdrop-blur-xl border border-white/10 p-4 rounded-2xl max-w-[200px]"
+                                className="hidden sm:block absolute -bottom-10 -right-10 bg-black/60 backdrop-blur-xl border border-white/10 p-4 rounded-2xl max-w-[200px]"
                             >
                                 <div className="flex items-center gap-2 mb-2">
                                     <FaUniversity className="text-yellow-500" />
