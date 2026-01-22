@@ -1,6 +1,4 @@
-import React, { useRef, useMemo, useState, useEffect } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Points, PointMaterial, Float, MeshDistortMaterial } from '@react-three/drei';
+import { Points, PointMaterial, Float, MeshDistortMaterial, View } from '@react-three/drei';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as random from 'maath/random/dist/maath-random.esm';
 import { FaRobot, FaTimes, FaPowerOff, FaChevronRight } from 'react-icons/fa';
@@ -105,9 +103,10 @@ const Hero = () => {
         <section className="relative h-screen w-full overflow-hidden bg-bg-primary flex items-center justify-center">
             {/* 3D Background */}
             <div className="absolute inset-0 z-0">
-                <Canvas camera={{ position: [0, 0, 1] }}>
+                <View className="w-full h-full">
+                    <ambientLight intensity={0.5} />
                     <ParticleField />
-                </Canvas>
+                </View>
             </div>
 
             {/* Content */}
@@ -157,11 +156,11 @@ const Hero = () => {
                             <div className="relative bg-bg-card/60 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl overflow-hidden">
                                 {/* 3D Avatar */}
                                 <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-40 h-40 pointer-events-none">
-                                    <Canvas>
+                                    <View className="w-full h-full">
                                         <ambientLight intensity={0.8} />
                                         <pointLight position={[10, 10, 10]} intensity={1.5} />
                                         <AnimatedAvatar />
-                                    </Canvas>
+                                    </View>
                                 </div>
 
                                 <div className="mt-16 space-y-6 min-h-[300px] text-left">

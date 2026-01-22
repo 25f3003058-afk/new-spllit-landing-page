@@ -85,8 +85,8 @@ const HowItWorks = () => {
                     </p>
                 </div>
 
-                {/* 3D Path Container */}
-                <div className="relative max-w-4xl mx-auto h-[300px] flex items-center justify-center">
+                {/* 3D Path Container - Improved mobile responsiveness */}
+                <div className="relative max-w-4xl mx-auto h-[400px] md:h-[300px] flex items-center justify-center">
                     {/* Road Base */}
                     <div className="absolute w-full h-3 bg-gray-800 rounded-full overflow-hidden shadow-inner">
                         <div className="w-full h-full bg-gray-700 opacity-30" />
@@ -111,7 +111,7 @@ const HowItWorks = () => {
                         style={{ x: '-50%' }}
                     >
                         <div className="relative">
-                            <FaMotorcycle className="text-4xl transform -scale-x-100" />
+                            <FaMotorcycle className="text-3xl md:text-4xl transform -scale-x-100" />
                             {/* Smoke Effect */}
                             <motion.div
                                 animate={{ opacity: [0, 0.4, 0], x: [-5, -20], scale: [0.5, 1.2] }}
@@ -122,25 +122,26 @@ const HowItWorks = () => {
                     </motion.div>
 
                     {/* Steps */}
-                    <div className="absolute top-0 left-0 w-full h-full flex justify-between items-center z-10 px-4">
+                    <div className="absolute top-0 left-0 w-full h-full flex justify-between items-center z-10 px-0 md:px-4">
                         {steps.map((step, index) => (
                             <motion.div
                                 key={step.id}
                                 onMouseEnter={() => setActiveStep(index)}
-                                className="relative group cursor-pointer flex flex-col items-center"
+                                onClick={() => setActiveStep(index)}
+                                className="relative group cursor-pointer flex flex-col items-center flex-1"
                                 whileHover={{ scale: 1.05, y: -5 }}
                             >
                                 {/* Step Node */}
-                                <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 z-10 ${index <= activeStep ? 'bg-bg-card border-accent-green shadow-[0_0_15px_rgba(16,185,129,0.4)]' : 'bg-bg-card border-gray-700'}`}>
-                                    <div className={`${index <= activeStep ? 'text-accent-green' : 'text-gray-500'} transition-colors duration-300 text-lg`}>
+                                <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 z-10 ${index <= activeStep ? 'bg-bg-card border-accent-green shadow-[0_0_15px_rgba(16,185,129,0.4)]' : 'bg-bg-card border-gray-700'}`}>
+                                    <div className={`${index <= activeStep ? 'text-accent-green' : 'text-gray-500'} transition-colors duration-300 text-base md:text-xl`}>
                                         {step.icon}
                                     </div>
                                 </div>
 
-                                {/* Step Info Card */}
-                                <div className={`absolute top-20 w-32 text-center transition-opacity duration-300 ${index === activeStep ? 'opacity-100' : 'opacity-60'}`}>
-                                    <h3 className={`text-base font-bold mb-1 transition-colors ${index <= activeStep ? 'text-white' : 'text-gray-500'}`}>{step.title}</h3>
-                                    <p className="text-xs text-text-secondary">{step.description}</p>
+                                {/* Step Info Card - Better mobile positioning */}
+                                <div className={`absolute top-16 md:top-20 w-24 md:w-32 text-center transition-all duration-300 ${index === activeStep ? 'opacity-100 translate-y-0' : 'opacity-40 translate-y-2'}`}>
+                                    <h3 className={`text-sm md:text-base font-bold mb-1 transition-colors ${index <= activeStep ? 'text-white' : 'text-gray-500'}`}>{step.title}</h3>
+                                    <p className="text-[10px] md:text-xs text-text-secondary line-clamp-2">{step.description}</p>
                                 </div>
                             </motion.div>
                         ))}

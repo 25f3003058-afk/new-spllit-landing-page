@@ -1,7 +1,9 @@
-import React from 'react';
+import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Layout from './components/Layout';
+
+// Core Components
 import Hero from './components/Hero';
 import HowItWorks from './components/HowItWorks';
 import Features from './components/Features';
@@ -9,13 +11,22 @@ import Integrations from './components/Integrations';
 import Testimonials from './components/Testimonials';
 import CTA from './components/CTA';
 import SEO from './components/SEO';
-import About from './pages/About';
-import FeaturesPage from './pages/FeaturesPage';
-import HowItWorksPage from './pages/HowItWorksPage';
-import Blog from './pages/Blog';
-import FAQ from './pages/FAQ';
-import Pricing from './pages/Pricing';
-import Login from './pages/Login';
+
+// Lazy Loaded Pages
+const About = lazy(() => import('./pages/About'));
+const FeaturesPage = lazy(() => import('./pages/FeaturesPage'));
+const HowItWorksPage = lazy(() => import('./pages/HowItWorksPage'));
+const Blog = lazy(() => import('./pages/Blog'));
+const FAQ = lazy(() => import('./pages/FAQ'));
+const Pricing = lazy(() => import('./pages/Pricing'));
+const Login = lazy(() => import('./pages/Login'));
+
+// Loading Fallback
+const PageLoader = () => (
+  <div className="h-screen w-full flex items-center justify-center bg-bg-primary">
+    <div className="w-12 h-12 border-4 border-accent-green border-t-transparent rounded-full animate-spin"></div>
+  </div>
+);
 
 const Home = () => (
   <>
@@ -37,16 +48,18 @@ function App() {
     <HelmetProvider>
       <Router>
         <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/features" element={<FeaturesPage />} />
-            <Route path="/how-it-works" element={<HowItWorksPage />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/features" element={<FeaturesPage />} />
+              <Route path="/how-it-works" element={<HowItWorksPage />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </Suspense>
         </Layout>
       </Router>
     </HelmetProvider>

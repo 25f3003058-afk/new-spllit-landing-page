@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Canvas } from '@react-three/fiber';
-import { Float, Box, Cylinder, Text, RoundedBox, Environment, useTexture } from '@react-three/drei';
+import { View, Float, Box, Cylinder, Text, RoundedBox, Environment, PerspectiveCamera } from '@react-three/drei';
 
 const FeatureIcon3D = ({ type }) => {
     return (
         <div className="w-full h-full">
-            <Canvas shadows dpr={[1, 2]}>
+            <View className="w-full h-full">
+                <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={40} />
                 <ambientLight intensity={1} />
                 <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} castShadow />
                 <pointLight position={[-10, -10, -10]} intensity={1} color="#10b981" />
@@ -120,7 +118,7 @@ const FeatureIcon3D = ({ type }) => {
                     )}
 
                 </Float>
-            </Canvas>
+            </View>
         </div>
     );
 };
@@ -139,29 +137,35 @@ const FlipCard = ({ feature }) => {
                 animate={{ rotateY: isFlipped ? 180 : 0 }}
                 transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
             >
-                {/* Front Face: Dark Theme + 3D Icon + Heading */}
-                <div className="absolute inset-0 backface-hidden bg-bg-card rounded-[2rem] shadow-xl border border-accent-green/10 flex flex-col items-center justify-between p-8 overflow-hidden">
+                <div
+                    className="absolute inset-0 bg-bg-card rounded-[2rem] shadow-xl border border-accent-green/10 flex flex-col items-center justify-between p-8 overflow-hidden"
+                    style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+                >
                     {/* Subtle Glow */}
                     <div className="absolute -right-10 -top-10 w-40 h-40 bg-accent-green/5 rounded-full blur-3xl group-hover:bg-accent-green/10 transition-colors"></div>
 
-                    {/* 3D Icon Container */}
-                    <div className="w-64 h-64 relative z-10 -mt-10">
+                    {/* 3D Icon Container - Responsive scale */}
+                    <div className="w-48 h-48 md:w-64 md:h-64 relative z-10 -mt-6 md:-mt-10">
                         <FeatureIcon3D type={feature.type} />
                     </div>
 
                     {/* Heading on Front */}
                     <div className="relative z-10 text-center mt-auto pb-4">
-                        <h3 className="text-2xl font-bold text-gray-400 font-poppins tracking-wide uppercase group-hover:text-accent-green transition-colors">{feature.tag}</h3>
+                        <h3 className="text-xl md:text-2xl font-bold text-gray-400 font-poppins tracking-wide uppercase group-hover:text-accent-green transition-colors">{feature.tag}</h3>
                     </div>
                 </div>
 
                 {/* Back Face: Info with Black Bg & Yellow Text */}
                 <div
-                    className="absolute inset-0 backface-hidden bg-black rounded-[2rem] shadow-2xl flex flex-col items-center justify-center p-8 text-center rotate-y-180 border border-yellow-400/20"
-                    style={{ transform: 'rotateY(180deg)' }}
+                    className="absolute inset-0 bg-black rounded-[2rem] shadow-2xl flex flex-col items-center justify-center p-8 text-center border border-yellow-400/20"
+                    style={{
+                        transform: 'rotateY(180deg)',
+                        backfaceVisibility: 'hidden',
+                        WebkitBackfaceVisibility: 'hidden'
+                    }}
                 >
-                    <h3 className="text-2xl font-bold text-yellow-400 mb-4 font-poppins tracking-wide">{feature.title}</h3>
-                    <p className="text-gray-300 font-medium leading-relaxed font-poppins text-sm">
+                    <h3 className="text-xl md:text-2xl font-bold text-yellow-400 mb-4 font-poppins tracking-wide">{feature.title}</h3>
+                    <p className="text-gray-300 font-medium leading-relaxed font-poppins text-xs md:text-sm">
                         {feature.description}
                     </p>
                     <div className="mt-8">
