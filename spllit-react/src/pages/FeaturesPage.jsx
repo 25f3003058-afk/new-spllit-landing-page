@@ -202,10 +202,10 @@ const SavingsJackpot = () => {
     };
 
     return (
-        <section className="py-32 relative overflow-hidden bg-bg-primary">
+        <section className="py-12 lg:py-32 relative overflow-hidden bg-bg-primary">
             <div className="container mx-auto px-6">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                    <div className="relative h-[700px] rounded-[4rem] bg-gradient-to-b from-black/60 to-black/20 border border-white/10 shadow-[0_0_100px_rgba(16,185,129,0.1)] overflow-hidden group">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
+                    <div className="relative h-[450px] lg:h-[700px] rounded-[2.5rem] lg:rounded-[4rem] bg-gradient-to-b from-black/60 to-black/20 border border-white/10 shadow-[0_0_100px_rgba(16,185,129,0.1)] overflow-hidden group order-1">
 
                         {/* Confetti Effect */}
                         <AnimatePresence>
@@ -247,7 +247,9 @@ const SavingsJackpot = () => {
 
                         {/* Jar Container */}
                         <div className="absolute inset-0 z-10 flex items-center justify-center">
-                            <LightweightJar coinCount={savings} shake={isShaking} />
+                            <div className="scale-75 sm:scale-100 transform-gpu">
+                                <LightweightJar coinCount={savings} shake={isShaking} />
+                            </div>
                         </div>
 
                         {/* Congratulations Ribbon */}
@@ -257,15 +259,15 @@ const SavingsJackpot = () => {
                                     initial={{ opacity: 0, y: -50, scale: 0.5 }}
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     exit={{ opacity: 0, y: 50, scale: 0.5 }}
-                                    className="absolute top-12 left-1/2 -translate-x-1/2 z-30 w-full max-w-md px-6"
+                                    className="absolute top-20 left-1/2 -translate-x-1/2 z-50 w-full max-w-xs sm:max-w-md px-4 sm:px-6"
                                 >
                                     <div className="relative">
                                         <div className="absolute -inset-4 bg-accent-green/20 blur-2xl rounded-full"></div>
-                                        <div className="relative bg-gradient-to-r from-accent-green via-accent-emerald to-accent-green bg-[length:200%_auto] animate-gradient px-8 py-5 rounded-3xl shadow-[0_20px_50px_rgba(16,185,129,0.3)] border border-white/20 text-center">
-                                            <p className="text-black font-black text-2xl font-poppins mb-1">
+                                        <div className="relative bg-gradient-to-r from-accent-green via-accent-emerald to-accent-green bg-[length:200%_auto] animate-gradient px-4 py-4 sm:px-8 sm:py-5 rounded-3xl shadow-[0_20px_50px_rgba(16,185,129,0.3)] border border-white/20 text-center">
+                                            <p className="text-black font-black text-xl sm:text-2xl font-poppins mb-1">
                                                 🎉 JACKPOT!
                                             </p>
-                                            <p className="text-black/90 font-bold text-lg font-poppins">
+                                            <p className="text-black/90 font-bold text-sm sm:text-lg font-poppins">
                                                 You saved 1 Carbon Coin
                                             </p>
                                         </div>
@@ -275,17 +277,17 @@ const SavingsJackpot = () => {
                         </AnimatePresence>
 
                         {/* Savings Counter */}
-                        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 w-full max-w-xs px-6">
+                        <div className="absolute bottom-6 sm:bottom-12 left-1/2 -translate-x-1/2 z-30 w-full max-w-[250px] sm:max-w-xs px-4 sm:px-6">
                             <motion.div
                                 key={savings}
                                 initial={{ scale: 0.9, y: 20 }}
                                 animate={{ scale: 1, y: 0 }}
-                                className="bg-white/5 backdrop-blur-2xl border border-white/20 px-10 py-6 rounded-[2.5rem] text-center shadow-2xl"
+                                className="bg-white/5 backdrop-blur-2xl border border-white/20 px-6 py-4 sm:px-10 sm:py-6 rounded-[2rem] sm:rounded-[2.5rem] text-center shadow-2xl"
                             >
-                                <p className="text-accent-green text-xs uppercase tracking-[0.3em] font-black mb-2 font-poppins">Total Carbon Savings</p>
+                                <p className="text-accent-green text-[10px] sm:text-xs uppercase tracking-[0.3em] font-black mb-2 font-poppins">Total Carbon Savings</p>
                                 <div className="flex items-center justify-center gap-3">
-                                    <span className="text-5xl font-black text-white font-poppins">{savings}</span>
-                                    <span className="text-accent-green text-xl font-bold font-poppins">COINS</span>
+                                    <span className="text-3xl sm:text-5xl font-black text-white font-poppins">{savings}</span>
+                                    <span className="text-accent-green text-lg sm:text-xl font-bold font-poppins">COINS</span>
                                 </div>
                             </motion.div>
                         </div>
@@ -297,17 +299,17 @@ const SavingsJackpot = () => {
                         </div>
                     </div>
 
-                    <div className="max-w-xl">
+                    <div className="max-w-xl order-2 text-center lg:text-left">
                         <motion.div
                             initial={{ width: 0 }}
                             whileInView={{ width: "100px" }}
-                            className="h-1.5 bg-accent-green mb-10 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.5)]"
+                            className="h-1.5 bg-accent-green mb-6 sm:mb-10 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.5)] mx-auto lg:mx-0"
                         ></motion.div>
-                        <h2 className="text-6xl md:text-8xl font-black text-white mb-10 leading-[0.9] font-poppins tracking-tighter">
+                        <h2 className="text-4xl sm:text-6xl md:text-8xl font-black text-white mb-6 sm:mb-10 leading-[0.9] font-poppins tracking-tighter">
                             The Savings <br />
                             <span className="text-accent-green">Jackpot.</span>
                         </h2>
-                        <p className="text-text-secondary text-2xl leading-relaxed mb-14 font-light font-poppins">
+                        <p className="text-text-secondary text-lg sm:text-2xl leading-relaxed mb-10 sm:mb-14 font-light font-poppins">
                             Every trip you split contributes to your personal carbon jackpot. Watch your impact grow in real-time with our savings engine.
                         </p>
 
@@ -315,7 +317,7 @@ const SavingsJackpot = () => {
                             whileHover={{ scale: 1.05, boxShadow: "0 0 50px rgba(16,185,129,0.6)" }}
                             whileTap={{ scale: 0.95 }}
                             onClick={handleSave}
-                            className="bg-accent-green text-black px-16 py-8 rounded-full font-black text-2xl shadow-2xl transition-all duration-300 flex items-center gap-6 group font-poppins"
+                            className="bg-accent-green text-black px-10 sm:px-16 py-6 sm:py-8 rounded-full font-black text-xl sm:text-2xl shadow-2xl transition-all duration-300 flex items-center justify-center lg:justify-start gap-4 sm:gap-6 group font-poppins mx-auto lg:mx-0 w-full sm:w-auto"
                         >
                             <span>SAVE NOW</span>
                             <motion.div
