@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaArrowLeft, FaWhatsapp, FaUniversity, FaSearchLocation, FaUserCheck, FaBell } from 'react-icons/fa';
+import { FaArrowLeft, FaWhatsapp, FaUniversity, FaSearchLocation, FaUserCheck, FaBell, FaGraduationCap } from 'react-icons/fa';
 
 // --- Premium Phone Mockup with "Live Match" Simulation ---
 const PhoneMockup = () => {
@@ -156,12 +156,17 @@ const Login = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
                         >
-                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-accent-green/10 border border-accent-green/20 rounded-full mb-8">
-                                <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                                </span>
-                                <span className="text-accent-green text-xs font-bold tracking-widest uppercase">IIT Madras BS Community</span>
+                            {/* TARGET AUDIENCE BADGE - EMPHASIZED */}
+                            <div className="inline-block mb-6">
+                                <motion.div
+                                    whileHover={{ scale: 1.05 }}
+                                    className="px-6 py-2 bg-gradient-to-r from-red-600 to-red-900 rounded-full border border-red-500/30 shadow-[0_0_20px_rgba(220,38,38,0.4)] flex items-center gap-3"
+                                >
+                                    <FaGraduationCap className="text-white text-xl" />
+                                    <span className="text-white font-bold tracking-wide uppercase text-sm">
+                                        Exclusively for IIT Madras BS Students
+                                    </span>
+                                </motion.div>
                             </div>
 
                             <h1 className="text-5xl lg:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight">
@@ -181,10 +186,16 @@ const Login = () => {
                                 <button className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-all shadow-[0_0_40px_rgba(255,255,255,0.1)] flex items-center justify-center gap-2">
                                     Join the Waitlist
                                 </button>
-                                <button className="w-full sm:w-auto px-8 py-4 bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] font-bold rounded-xl hover:bg-[#25D366]/20 transition-all flex items-center justify-center gap-2">
+
+                                <a
+                                    href="https://chat.whatsapp.com/H49JywLfKsxAoC8X5wC0yg"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full sm:w-auto px-8 py-4 bg-[#25D366] text-black font-bold rounded-xl hover:bg-[#20bd5a] hover:scale-105 transition-all shadow-[0_0_30px_rgba(37,211,102,0.4)] flex items-center justify-center gap-2"
+                                >
                                     <FaWhatsapp className="text-xl" />
-                                    Join Whatsapp Community
-                                </button>
+                                    Join Community Group
+                                </a>
                             </div>
 
                             <div className="mt-12 flex items-center justify-center lg:justify-start gap-4">
@@ -200,7 +211,7 @@ const Login = () => {
                                 </div>
                                 <div className="text-left">
                                     <p className="text-white font-bold text-lg leading-none">{count}+</p>
-                                    <p className="text-gray-500 text-xs">Students Joined</p>
+                                    <p className="text-gray-500 text-xs">BS Students Joined</p>
                                 </div>
                             </div>
                         </motion.div>
