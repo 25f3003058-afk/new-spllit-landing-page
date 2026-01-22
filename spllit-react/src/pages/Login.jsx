@@ -218,12 +218,12 @@ const Login = () => {
                     </div>
 
                     {/* Right: Interactive Component */}
-                    <div className="flex-1 w-full flex justify-center relative order-2 mb-8 lg:mb-0 -mt-20 sm:mt-0">
+                    <div className="flex-1 w-full flex justify-center relative order-2 mb-8 lg:mb-0 mt-4 sm:mt-0">
                         <motion.div
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8 }}
-                            className="relative scale-[0.6] sm:scale-100 transform-gpu origin-top"
+                            className="relative scale-[0.5] sm:scale-100 transform-gpu origin-top"
                         >
                             {/* Glow Effects behind phone */}
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] lg:w-[500px] h-[300px] lg:h-[500px] bg-accent-green/20 rounded-full blur-[80px] lg:blur-[120px] pointer-events-none" />
