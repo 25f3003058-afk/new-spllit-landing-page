@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Canvas } from '@react-three/fiber';
-import { Environment, Float, OrbitControls, Text, PerspectiveCamera } from '@react-three/drei';
+import { Environment, Float, OrbitControls, Text } from '@react-three/drei';
 import { FaLinkedin, FaTwitter, FaGithub, FaPlay, FaUniversity, FaRocket } from 'react-icons/fa';
 import {
     SiNodedotjs,

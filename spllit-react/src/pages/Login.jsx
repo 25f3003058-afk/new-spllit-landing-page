@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, Text, MeshDistortMaterial, Sphere } from '@react-three/drei';
+import { View, Float, Text, MeshDistortMaterial, PerspectiveCamera } from '@react-three/drei';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
@@ -33,7 +32,8 @@ const Login = () => {
             </Link>
 
             <div className="absolute inset-0 z-0">
-                <Canvas>
+                <View className="w-full h-full">
+                    <PerspectiveCamera makeDefault position={[0, 0, 5]} />
                     <ambientLight intensity={0.5} />
                     <pointLight position={[10, 10, 10]} />
                     <FloatingShape />
@@ -49,7 +49,7 @@ const Login = () => {
                             Coming Soon
                         </Text>
                     </Float>
-                </Canvas>
+                </View>
             </div>
 
             <div className="relative z-10 text-center mt-40">

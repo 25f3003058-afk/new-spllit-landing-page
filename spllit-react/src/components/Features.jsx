@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { View, Float, Box, Cylinder, Text, RoundedBox, Environment, PerspectiveCamera } from '@react-three/drei';
 
 const FeatureIcon3D = ({ type }) => {

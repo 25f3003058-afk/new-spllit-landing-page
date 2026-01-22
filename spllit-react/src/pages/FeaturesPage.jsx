@@ -1,7 +1,6 @@
 import React, { useState, useRef, Suspense, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, Float, PerspectiveCamera, ContactShadows, MeshTransmissionMaterial, Sparkles } from '@react-three/drei';
+import { View, Environment, Float, PerspectiveCamera, ContactShadows, MeshTransmissionMaterial, Sparkles } from '@react-three/drei';
 import * as THREE from 'three';
 import Lottie from 'lottie-react';
 import Features from '../components/Features';
@@ -239,11 +238,11 @@ const SavingsJackpot = () => {
                             )}
                         </AnimatePresence>
 
-                        {/* 3D Canvas */}
+                        {/* 3D View */}
                         <div className="absolute inset-0 z-10">
-                            <Canvas shadows dpr={[1, 2]}>
+                            <View className="w-full h-full">
                                 <Scene coins={coins} removeCoin={removeCoin} shake={isShaking} />
-                            </Canvas>
+                            </View>
                         </div>
 
                         {/* Congratulations Ribbon */}
