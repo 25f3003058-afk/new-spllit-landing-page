@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { View, Float, Box, Cylinder, Text, RoundedBox, Environment, PerspectiveCamera } from '@react-three/drei';
+import { View, Float, Box, Cylinder, Text, RoundedBox, PerspectiveCamera } from '@react-three/drei';
 
 const FeatureIcon3D = ({ type }) => {
     return (
         <div className="w-full h-full">
             <View className="w-full h-full">
                 <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={40} />
-                <ambientLight intensity={1} />
+                <ambientLight intensity={1.5} />
                 <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} castShadow />
-                <pointLight position={[-10, -10, -10]} intensity={1} color="#10b981" />
-                <Environment preset="city" />
+                <pointLight position={[-10, -10, -10]} intensity={1.5} color="#10b981" />
+                <pointLight position={[5, 5, 5]} intensity={1} color="#ffffff" />
                 <Float speed={3} rotationIntensity={0.4} floatIntensity={0.5}>
 
                     {/* Credit Card (Realistic) */}

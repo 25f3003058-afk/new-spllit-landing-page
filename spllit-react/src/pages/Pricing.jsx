@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
 import { FaCheck } from 'react-icons/fa';
+import SEO from '../components/SEO';
 
 // Lazy load InstituteSection for better performance
 const InstituteSection = lazy(() => import('../components/InstituteSection'));
