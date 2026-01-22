@@ -1,156 +1,240 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaArrowLeft, FaWhatsapp, FaTelegram, FaMapMarkerAlt, FaUserFriends, FaMobileAlt } from 'react-icons/fa';
+import { FaArrowLeft, FaWhatsapp, FaUniversity, FaSearchLocation, FaUserCheck, FaBell } from 'react-icons/fa';
 
+// --- Premium Phone Mockup with "Live Match" Simulation ---
 const PhoneMockup = () => {
+    // Automate a "notification" popping up
+    const [showNotif, setShowNotif] = useState(false);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setShowNotif(true);
+            setTimeout(() => setShowNotif(false), 4000);
+        }, 6000);
+        return () => clearInterval(timer);
+    }, []);
+
     return (
-        <div className="relative w-[300px] h-[600px] bg-gray-900 rounded-[3rem] border-8 border-gray-800 shadow-2xl overflow-hidden">
-            {/* Notch */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-gray-800 rounded-b-xl z-20"></div>
+        <div className="relative w-[320px] h-[640px] bg-[#0a0a0a] rounded-[3.5rem] border-[8px] border-[#1a1a1a] shadow-2xl overflow-hidden ring-4 ring-white/5">
+            {/* Dynamic Island / Notch */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-black rounded-full z-30 flex items-center justify-center p-1">
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse ml-auto mr-2" />
+            </div>
 
             {/* Screen Content */}
-            <div className="w-full h-full bg-gradient-to-b from-gray-900 to-black relative flex flex-col items-center justify-center p-6">
+            <div className="w-full h-full bg-gradient-to-b from-gray-900 to-black relative flex flex-col p-6 pt-16">
 
-                {/* Floating Logo */}
-                <motion.div
-                    animate={{ y: [-10, 10, -10] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-24 h-24 bg-accent-green rounded-2xl flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(16,185,129,0.4)]"
-                >
-                    <span className="text-4xl font-black text-black">S</span>
-                </motion.div>
-
-                {/* App Text */}
-                <h3 className="text-2xl font-bold text-white mb-2">Spllit</h3>
-                <div className="px-3 py-1 bg-white/10 rounded-full border border-white/20 mb-8">
-                    <span className="text-xs text-accent-green font-mono uppercase tracking-widest">Beta Access</span>
-                </div>
-
-                {/* Mock UI Elements */}
-                <div className="w-full space-y-3 opacity-50">
-                    <div className="h-12 bg-gray-800 rounded-xl w-full animate-pulse"></div>
-                    <div className="h-32 bg-gray-800 rounded-xl w-full animate-pulse"></div>
-                    <div className="flex gap-3">
-                        <div className="h-20 bg-gray-800 rounded-xl w-1/2 animate-pulse"></div>
-                        <div className="h-20 bg-gray-800 rounded-xl w-1/2 animate-pulse"></div>
+                {/* Header */}
+                <div className="flex justify-between items-center mb-8">
+                    <div>
+                        <h4 className="text-white font-bold text-lg">Hello, Ankit 👋</h4>
+                        <p className="text-xs text-gray-500">BS Degree • Year 2</p>
+                    </div>
+                    <div className="w-10 h-10 rounded-full bg-gray-800 border border-gray-700 overflow-hidden">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="avatar" />
                     </div>
                 </div>
 
-                {/* Coming Soon Overlay */}
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-10">
-                    <div className="text-center p-6 border border-white/10 bg-black/80 rounded-2xl mx-4 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
-                        <p className="text-accent-green font-bold text-xl mb-1">COMING SOON</p>
-                        <p className="text-gray-400 text-sm">To Your Pocket</p>
+                {/* Main Card: "Searching" */}
+                <div className="bg-gray-800/50 rounded-3xl p-6 border border-white/5 mb-6 relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-accent-green/5 group-hover:bg-accent-green/10 transition-colors" />
+                    <div className="flex justify-between items-start mb-4">
+                        <div className="p-3 bg-blue-500/20 rounded-2xl text-blue-400">
+                            <FaSearchLocation className="text-xl" />
+                        </div>
+                        <span className="text-xs font-mono text-gray-400 bg-black/40 px-2 py-1 rounded">SCANNING</span>
                     </div>
+                    <h5 className="text-gray-200 font-bold">Exam Center Search</h5>
+                    <p className="text-xs text-gray-500 mt-1">Finding students near T. Nagar...</p>
+
+                    {/* Radar Animation */}
+                    <div className="mt-6 flex justify-center py-4 relative">
+                        <div className="w-20 h-20 border border-white/10 rounded-full animate-ping absolute" />
+                        <div className="w-10 h-10 bg-accent-green rounded-full shadow-[0_0_20px_rgba(16,185,129,0.5)] z-10" />
+                        <div className="absolute -right-2 top-0 w-6 h-6 bg-purple-500 rounded-full border-2 border-gray-900 animate-bounce" />
+                    </div>
+                </div>
+
+                {/* "Live Notification" Popup */}
+                <AnimatePresence>
+                    {showNotif && (
+                        <motion.div
+                            initial={{ y: -100, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: -100, opacity: 0 }}
+                            className="absolute top-14 left-4 right-4 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl z-20 shadow-xl flex gap-3"
+                        >
+                            <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-black">
+                                <FaUserCheck />
+                            </div>
+                            <div>
+                                <h6 className="text-white font-bold text-sm">Match Found!</h6>
+                                <p className="text-xs text-gray-300">Rahul is going to Ion Digital Zone.</p>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                {/* Bottom Navigation Mock */}
+                <div className="mt-auto flex justify-between px-4 py-4 text-2xl text-gray-600">
+                    <div className="text-accent-green"><FaUniversity /></div>
+                    <div><FaSearchLocation /></div>
+                    <div><FaBell /></div>
                 </div>
             </div>
         </div>
     );
 };
 
-const Featurepill = ({ icon, text }) => (
-    <div className="flex items-center gap-3 px-4 py-2 bg-white/5 rounded-lg border border-white/10 text-gray-300 text-sm">
-        <span className="text-accent-green">{icon}</span>
-        <span>{text}</span>
+// --- Scrolling Pain Points Ticker ---
+const PainPointTicker = () => (
+    <div className="w-full overflow-hidden bg-white/5 border-y border-white/5 py-3 mb-12">
+        <motion.div
+            className="flex whitespace-nowrap gap-8"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        >
+            {[
+                "🚕 Cab fare ₹800? Split it.",
+                "😓 Traveling alone is boring.",
+                "📍 Exam center 20km away?",
+                "🤝 Meet your batchmates.",
+                "💸 Save 60% on travel.",
+                "🚕 Cab fare ₹800? Split it.",
+                "😓 Traveling alone is boring.",
+                "📍 Exam center 20km away?",
+            ].map((text, i) => (
+                <span key={i} className="text-gray-400 font-mono text-sm uppercase tracking-wider flex items-center gap-2">
+                    <span className="w-1 h-1 bg-accent-green rounded-full" /> {text}
+                </span>
+            ))}
+        </motion.div>
     </div>
 );
 
 const Login = () => {
-    return (
-        <div className="min-h-screen bg-bg-primary overflow-hidden relative flex flex-col lg:flex-row">
+    // Stats Counter Animation
+    const [count, setCount] = useState(0);
+    useEffect(() => {
+        const controls = setInterval(() => {
+            setCount(prev => prev < 427 ? prev + 3 : 427);
+        }, 10);
+        return () => clearInterval(controls);
+    }, []);
 
-            {/* Background Gradients */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-                <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-accent-green/10 rounded-full blur-[100px]" />
-                <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px]" />
+    return (
+        <div className="min-h-screen bg-[#050505] overflow-hidden relative font-poppins selection:bg-accent-green selection:text-black">
+
+            {/* Animated Grid Background */}
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none" />
+            <div className="absolute inset-0 z-0 opacity-30">
+                <svg className="w-full h-full" width="100%" height="100%">
+                    <defs>
+                        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                </svg>
             </div>
 
             {/* Back Button */}
-            <Link to="/" className="absolute top-8 left-8 z-30 flex items-center gap-2 text-text-secondary hover:text-white transition-colors group">
+            <Link to="/" className="absolute top-8 left-8 z-50 flex items-center gap-2 text-gray-400 hover:text-white transition-colors group px-4 py-2 rounded-full border border-white/5 bg-black/50 backdrop-blur-md">
                 <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" />
-                <span className="font-medium">Back to Home</span>
+                <span className="text-sm font-medium">Home</span>
             </Link>
 
-            {/* Left Content Section */}
-            <div className="flex-1 flex flex-col justify-center px-8 lg:px-20 pt-24 pb-12 relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="max-w-xl"
-                >
-                    <div className="inline-block px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-300 text-xs font-bold uppercase tracking-wider mb-6">
-                        IIT Madras BS Exclusive
+            <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
+                <div className="flex flex-col lg:flex-row items-center gap-20">
+
+                    {/* Left: Content */}
+                    <div className="flex-1 text-center lg:text-left">
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8 }}
+                        >
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-accent-green/10 border border-accent-green/20 rounded-full mb-8">
+                                <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                </span>
+                                <span className="text-accent-green text-xs font-bold tracking-widest uppercase">IIT Madras BS Community</span>
+                            </div>
+
+                            <h1 className="text-5xl lg:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight">
+                                Don't Travel to <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green via-emerald-400 to-teal-500">
+                                    Exam Centers
+                                </span> Alone.
+                            </h1>
+
+                            <p className="text-gray-400 text-lg lg:text-xl mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                                Connect with verified batchmates going to the same Ion Digital Zone. Split the cab fare, share notes, and make the journey count.
+                            </p>
+
+                            <PainPointTicker />
+
+                            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                                <button className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-all shadow-[0_0_40px_rgba(255,255,255,0.1)] flex items-center justify-center gap-2">
+                                    Join the Waitlist
+                                </button>
+                                <button className="w-full sm:w-auto px-8 py-4 bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] font-bold rounded-xl hover:bg-[#25D366]/20 transition-all flex items-center justify-center gap-2">
+                                    <FaWhatsapp className="text-xl" />
+                                    Join Whatsapp Community
+                                </button>
+                            </div>
+
+                            <div className="mt-12 flex items-center justify-center lg:justify-start gap-4">
+                                <div className="flex -space-x-3">
+                                    {[1, 2, 3, 4].map(i => (
+                                        <div key={i} className="w-10 h-10 rounded-full border-2 border-black bg-gray-800 overflow-hidden">
+                                            <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i * 123}`} alt="student" />
+                                        </div>
+                                    ))}
+                                    <div className="w-10 h-10 rounded-full border-2 border-black bg-accent-green flex items-center justify-center text-black font-bold text-xs">
+                                        +420
+                                    </div>
+                                </div>
+                                <div className="text-left">
+                                    <p className="text-white font-bold text-lg leading-none">{count}+</p>
+                                    <p className="text-gray-500 text-xs">Students Joined</p>
+                                </div>
+                            </div>
+                        </motion.div>
                     </div>
 
-                    <h1 className="text-4xl lg:text-6xl font-black text-white mb-6 leading-tight">
-                        Struggling to find an <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-emerald-400">
-                            Exam Center Partner?
-                        </span>
-                    </h1>
+                    {/* Right: Interactive Component */}
+                    <div className="flex-1 flex justify-center relative">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.8 }}
+                            className="relative"
+                        >
+                            {/* Glow Effects behind phone */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent-green/20 rounded-full blur-[120px] pointer-events-none" />
 
-                    <p className="text-text-secondary text-lg mb-8 leading-relaxed">
-                        Join the tailored community for IITM BS students. Connect with batchmates traveling to the same center, save costs, and never travel alone again.
-                    </p>
+                            <PhoneMockup />
 
-                    <div className="flex flex-wrap gap-4 mb-10">
-                        <Featurepill icon={<FaMapMarkerAlt />} text="Same Center Matching" />
-                        <Featurepill icon={<FaUserFriends />} text="Verified Students" />
-                        <Featurepill icon={<FaMobileAlt />} text="Split Costs Instantly" />
+                            {/* Floating Badge */}
+                            <motion.div
+                                animate={{ y: [-10, 10, -10] }}
+                                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                className="absolute -bottom-10 -right-10 bg-black/60 backdrop-blur-xl border border-white/10 p-4 rounded-2xl max-w-[200px]"
+                            >
+                                <div className="flex items-center gap-2 mb-2">
+                                    <FaUniversity className="text-yellow-500" />
+                                    <span className="text-xs font-bold text-white">IIT Madras Verified</span>
+                                </div>
+                                <p className="text-[10px] text-gray-400">Exclusive network for BS Degree students.</p>
+                            </motion.div>
+                        </motion.div>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-4">
-                        <button className="px-8 py-4 bg-accent-green text-black font-bold rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
-                            <span>Join Waitlist</span>
-                            <span className="bg-black/20 px-2 py-0.5 rounded text-xs">#EarlyAccess</span>
-                        </button>
-
-                        <button className="px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-3">
-                            <FaWhatsapp className="text-xl text-green-400" />
-                            <span>Join Community</span>
-                        </button>
-                    </div>
-
-                    <div className="mt-8 flex items-center gap-4 text-xs text-gray-500 font-mono">
-                        <span className="flex items-center gap-1.5">
-                            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                            400+ Students Waiting
-                        </span>
-                        <span>•</span>
-                        <span>Launching this Semester</span>
-                    </div>
-                </motion.div>
-            </div>
-
-            {/* Right Visual Section */}
-            <div className="flex-1 flex items-center justify-center relative min-h-[500px] lg:min-h-auto bg-gradient-to-b from-transparent to-black/20">
-                {/* Abstract Shapes */}
-                <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-                    className="absolute w-[600px] h-[600px] border border-white/5 rounded-full border-dashed"
-                />
-                <motion.div
-                    animate={{ rotate: -360 }}
-                    transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                    className="absolute w-[400px] h-[400px] border border-accent-green/10 rounded-full"
-                />
-
-                {/* Phone Mockup with floating animation */}
-                <motion.div
-                    initial={{ y: 50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                    <motion.div
-                        animate={{ y: [-15, 15, -15] }}
-                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                        <PhoneMockup />
-                    </motion.div>
-                </motion.div>
+                </div>
             </div>
         </div>
     );
